@@ -3,15 +3,6 @@ from sys import platform
 import ciphers as cipher
 
 
-'''
-r = reverse
-c = caesar
-n = numbers
-h = horizontal matrix
-v = vertical matrix
-ra = random
-'''
-
 def get_arguments():
     parser = argparse.ArgumentParser(prog="Liandr4's Crypt")
     parser.add_argument('message', help='Mandatory, a message to be encrypted or decrypted, please use quotes if has any special character or spaces.')
@@ -61,7 +52,7 @@ else:
 
 print(args)
 key = None
-#Segue, na ordem exata, os métodos requisitados pelo usuário distinguindo se deve ser feita encriptação ou decriptação
+
 for m in args.method:
     if m == 'r':
         final_message = cipher.reverse(final_message, code)
@@ -75,7 +66,6 @@ for m in args.method:
         final_message = cipher.alternate(final_message, code)
     elif m == 'ra':
         final_message, key = cipher.random_key(final_message, code, args.key)
-
 
 if args.clear == True:
     try:
@@ -94,7 +84,6 @@ print(f'\n{final_message}\n')
 if key != None:
     print(key)
 
-#argparse also have a file handling method
 if args.output:
     try:
         file = open(args.output[0], args.output[1])

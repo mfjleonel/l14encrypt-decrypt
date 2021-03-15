@@ -88,7 +88,7 @@ def char_num(message, method):
     return output
 
 
-#Missing decrypt message
+#Missing decrypt method
 def horizontal_matrix(message, method, shift):
     x = -1
     actual_list = []
@@ -113,30 +113,18 @@ def horizontal_matrix(message, method, shift):
                     output += row[x]
                 except IndexError:
                     break
-    
-    '''
-        x = -1
-        while x<= shift (4):
-            Para cada lista em listas:
-                try:
-                    nova_lista += lista[x]
-                except IndexError:
-                    break
-    ''' 
 
-    if method == 'd':
-        d_matrix = []
-        for row in matrix:
-            d_matrix += [[]]
+    # if method == 'd':
+    #     d_matrix = []
+    #     for row in matrix:
+    #         d_matrix += [[]]
 
-        while x <= shift:        
-            x += 1
-            for row in matrix:
-                for d_row in d_matrix:
-                    d_row += row[x]
+    #     while x <= shift:        
+    #         x += 1
+    #         for row in matrix:
+    #             for d_row in d_matrix:
+    #                 d_row += row[x]
 
-                
-        print(d_matrix)
     return output
 
 
