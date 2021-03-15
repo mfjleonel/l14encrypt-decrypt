@@ -88,7 +88,7 @@ def char_num(message, method):
     return output
 
 
-#Missing decrypt method
+# Missing decrypt method
 def horizontal_matrix(message, method, shift):
     x = -1
     actual_list = []

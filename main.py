@@ -6,8 +6,8 @@ import ciphers as cipher
 def get_arguments():
     parser = argparse.ArgumentParser(prog="Liandr4's Crypt")
     parser.add_argument('message', help='Mandatory, a message to be encrypted or decrypted, please use quotes if has any special character or spaces.')
-    parser.add_argument('cipher', nargs=1, choices=['e','d'], help='Choose wether to (e)ncrypt or (d)ecrypt given message.')
-    parser.add_argument('method', nargs ='*', choices =['a','r','c', 'n', 'h', 'v', 'ra'], help='Method to be used, can choose many, separating them with spaces. Order of choosing is respected.')
+    parser.add_argument('method', nargs=1, choices=['e','d'], help='Choose wether to (e)ncrypt or (d)ecrypt given message.')
+    parser.add_argument('cipher', nargs ='*', choices =['a','r','c', 'n', 'h', 'v', 'ra'], help='Method to be used, can choose many, separating them with spaces. Order of choosing is respected.')
     parser.add_argument('-s', '--shift', nargs=1, help="Can be used with Caesar's Cipher to define how long to jump.", default=3)
     parser.add_argument('-hs', '--horizontal_shift', nargs=1, help="Same as shift, but to define when to break words in horizontal matrix", default=4)
     parser.add_argument('-pw', '--preserve_whitespaces', action='store_true', help="Use it to preserve whitespaces. Keep in mind that this may alter the result with a few methods like alternate and colunar transposition, thus being need to passed as argument when decrypting.")
@@ -38,7 +38,7 @@ final_message = unidecode.unidecode(final_message)
 if args.preserve_whitespaces == False:
     final_message = final_message.replace(' ','')
 
-code = ''.join(args.cipher)
+method = ''.join(args.method)
 
 if args.shift!=3:
     shift = int(''.join(args.shift))
@@ -53,19 +53,19 @@ else:
 print(args)
 key = None
 
-for m in args.method:
+for m in args.cipher:
     if m == 'r':
-        final_message = cipher.reverse(final_message, code)
+        final_message = cipher.reverse(final_message, method)
     elif m == 'c':
-        final_message = cipher.caesar(final_message, code, shift)
+        final_message = cipher.caesar(final_message, method, shift)
     elif m == 'n':
-        final_message = cipher.char_num(final_message, code)
+        final_message = cipher.char_num(final_message, method)
     elif m == 'h':
-        final_message = cipher.horizontal_matrix(final_message, code, h_shift)
+        final_message = cipher.horizontal_matrix(final_message, method, h_shift)
     elif m == 'a':
-        final_message = cipher.alternate(final_message, code)
+        final_message = cipher.alternate(final_message, method)
     elif m == 'ra':
-        final_message, key = cipher.random_key(final_message, code, args.key)
+        final_message, key = cipher.random_key(final_message, method, args.key)
 
 if args.clear == True:
     try:
